@@ -34,7 +34,7 @@ var GithubAPI = (function(){
 							if(posts.hasOwnProperty(n)) 
 								ret.push(posts[n]);
 						ret.sort(function(a, b){
-							return a.date.getTime() - b.date.getTime();
+							return b.date.getTime() - a.date.getTime();
 						});
 						callback(ret);
 					}
