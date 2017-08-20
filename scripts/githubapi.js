@@ -21,17 +21,20 @@ var GithubAPI = (function(){
 						if(pieces.pop() !== "md") continue;
 						var title = pieces.join('').split("/").pop();
 						if(!posts.hasOwnProperty(title) || posts[title].date.getTime() < date.getTime()){
+							var removed = posts.hasOwnProperty(title) ? posts[title].removed : 0;
+							if(file.status == "removed") removed = date.getTime();
 							posts[title] = {
 								date: date,
 								title: title,
-								raw_url: file.raw_url
+								raw_url: file.raw_url,
+								removed: removed
 							};
 						}
 					}
 					if(!--pend){
 						var ret = [];
 						for(var n in posts)
-							if(posts.hasOwnProperty(n)) 
+							if(posts.hasOwnProperty(n) && posts[n].removed == 0) 
 								ret.push(posts[n]);
 						ret.sort(function(a, b){
 							return b.date.getTime() - a.date.getTime();
