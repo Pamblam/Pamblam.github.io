@@ -23,19 +23,23 @@ var GithubAPI = (function(){
 						if(!posts.hasOwnProperty(title) || posts[title].date.getTime() < date.getTime()){
 							var removed = posts.hasOwnProperty(title) ? posts[title].removed : 0;
 							if(file.status == "removed") removed = date.getTime();
+							var key = file.contents_url.split("?").pop().substr(4);
 							posts[title] = {
 								date: date,
 								title: title,
-								raw_url: file.raw_url,
+								raw_url: "https://raw.githubusercontent.com/"+self.user+"/"+repo+"/"+key+"/"+encodeURIComponent(file.filename),
 								removed: removed
 							};
 						}
 					}
 					if(!--pend){
 						var ret = [];
-						for(var n in posts)
-							if(posts.hasOwnProperty(n) && posts[n].removed == 0) 
+						for(var n in posts){
+							if(posts.hasOwnProperty(n) && posts[n].removed == 0){
+								delete posts[n].removed;
 								ret.push(posts[n]);
+							}
+						}
 						ret.sort(function(a, b){
 							return b.date.getTime() - a.date.getTime();
 						});
@@ -44,6 +48,14 @@ var GithubAPI = (function(){
 				});
 			})(c);
 		});
+	};
+	
+	GithubAPI.prototype.getGists = function(callback){
+		api("/users/"+this.user+"/gists", callback);
+	};
+	
+	GithubAPI.prototype.getGist = function(id, callback){
+		api("/gists/"+id, callback);
 	};
 	
 	GithubAPI.prototype.getRepos = function(callback){
