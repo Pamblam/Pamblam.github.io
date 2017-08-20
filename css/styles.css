@@ -1,0 +1,45 @@
+
+@font-face {
+    font-family: 'originals_is_outregular';
+    src: url('../fonts/originals_is_out-webfont.woff2') format('woff2'),
+         url('../fonts/originals_is_out-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'syncopatebold';
+    src: url('../fonts/syncopate-bold-webfont.woff2') format('woff2'),
+         url('../fonts/syncopate-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.jumbotron h1{
+	font-family: 'originals_is_outregular';
+	color: #FFD400;
+}
+
+.jumbotron p{
+	color: #F1E9DA;
+}
+
+.jumbotron{
+	background: #2E294E url("https://avatars1.githubusercontent.com/u/14949274?v=4") no-repeat fixed -200px -150px;
+}
+
+body, .btn-primary{
+	background: #F1E9DA;
+	font-family: "Verdana", "Geneva", "sans-serif"
+}
+
+p{
+	color: #3F4045;
+}
+
+h1, h2, h3, h4, h5{
+	color: #02111B;
+	font-family: 'syncopatebold';
+}
