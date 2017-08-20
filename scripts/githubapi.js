@@ -6,6 +6,11 @@ var GithubAPI = (function(){
 		this.repoData = false;
 	}
 	
+	GithubAPI.prototype.getBlogPosts = function(repo, path){
+		var posts = [];
+		
+	};
+	
 	GithubAPI.prototype.getRepos = function(callback){
 		if(this.repoData !== false) return callback(this.repoData);
 		api("/users/"+this.user+"/repos", callback);
